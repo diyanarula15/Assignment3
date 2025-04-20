@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,15 +13,15 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { PortfolioProvider } from "./contexts/PortfolioContext";
 import { AnimatePresence } from "framer-motion";
+import VirtualAssistant from './components/VirtualAssistant'; 
 
-// Scroll to top on route change component
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  
+
   return null;
 };
 
@@ -31,7 +30,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000,
+      staleTime: 5 * 60 * 1000, // 5 minutes
     },
   },
 });
@@ -39,7 +38,7 @@ const queryClient = new QueryClient({
 // Page transitions wrapper
 const PageTransitionWrapper = () => {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -67,6 +66,8 @@ const App: React.FC = () => (
             <Footer />
             <Toaster />
             <Sonner />
+            {/* --- Add the VirtualAssistant component here --- */}
+            <VirtualAssistant />
           </TooltipProvider>
         </BrowserRouter>
       </PortfolioProvider>
